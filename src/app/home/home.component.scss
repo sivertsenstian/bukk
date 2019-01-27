@@ -1,0 +1,30 @@
+.container {
+  margin-top: 30px;
+}
+.tables {
+  margin-top: 30px;
+  display: inline-grid;
+  grid-columns: 10;
+  grid-rows: 1;
+  grid-gap: 20px;
+  .online {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: row1-start;
+    grid-row-end: 1;
+  }
+  .live {
+    grid-column-start: 5;
+    grid-column-end: 10;
+    grid-row-start: row1-start;
+    grid-row-end: 1;
+  }
+}
+.new-game {
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+}
+mat-divider {
+  margin-top: 20px;
+}

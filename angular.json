@@ -27,7 +27,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+		"src/theme.scss",
+		"src/styles.scss"
             ],
             "scripts": []
           },
@@ -55,7 +56,15 @@
                   "maximumError": "5mb"
                 }
               ]
-            }
+            },
+	      "hmr": {
+		  "fileReplacements": [
+		      {
+			  "replace": "src/environments/environment.ts",
+			  "with": "src/environments/environment.hmr.ts"
+		      }
+		  ]
+	      }
           }
         },
         "serve": {
@@ -66,7 +75,11 @@
           "configurations": {
             "production": {
               "browserTarget": "bukk:build:production"
-            }
+            },
+	      "hmr": {
+		  "hmr": true,
+		  "browserTarget": "bukk:build:hmr"
+	      }
           }
         },
         "extract-i18n": {
