@@ -1,5 +1,5 @@
 import { UserId, GameId, User, Game } from './models';
-import { first } from 'lodash';
+import { first, includes } from 'lodash';
 
 ///// DATA ////
 const users: User[] = [
@@ -253,10 +253,17 @@ async function delay(ms: number) {
 }
 
 /// SERVER CALLS..
-export const GetUser = (id: UserId) => Promise.resolve(first(users));
+export const GetUser = async (id: UserId) => {
+  await delay(Math.random() * 2000);
+  return Promise.resolve(first(users));
+};
 export const GetUsers = async () => {
   await delay(Math.random() * 2000);
   return Promise.resolve(users);
+};
+export const GetUserGames = async (id: UserId) => {
+  await delay(Math.random() * 5000);
+  return Promise.resolve(games.filter(g => includes([g.white, g.black], id)));
 };
 
 export const GetGame = (id: GameId) => Promise.resolve(first(games));

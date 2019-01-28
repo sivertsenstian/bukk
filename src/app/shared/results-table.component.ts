@@ -5,7 +5,7 @@ import { Game, GameResult, User } from '../models';
   selector: 'bukk-results-table',
   template: `
     <div class="container" *ngIf="games">
-      <h3>{{ title }}</h3>
+      <div class="mat-title">{{ title }}</div>
       <mat-table [dataSource]="games" class="mat-elevation-z8">
         <ng-container matColumnDef="date">
           <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>

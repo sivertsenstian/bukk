@@ -12,6 +12,7 @@ import { Podium } from '../models';
           </div>
           <mat-card-title> {{ podium?.gold?.email }}</mat-card-title>
           <mat-card-subtitle> {{ podium?.gold?.rating }} ELO</mat-card-subtitle>
+          <a routerLink="/users/3">CLICKY</a>
         </mat-card-header>
       </mat-card>
 

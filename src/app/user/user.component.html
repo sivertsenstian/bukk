@@ -1,1 +1,13 @@
-<h1>USER</h1>
+<div class="container air">
+  <div class="mat-headline">{{ (user$ | async)?.email }}</div>
+  <div class="mat-subheading">{{ (user$ | async)?.rating }}</div>
+  <div class="mat-caption">{{ (user$ | async)?.lichessAccount }}</div>
+</div>
+<mat-divider></mat-divider>
+<div class="container air">
+  <bukk-results-table
+    title="Games"
+    [games]="games$ | async"
+    [users]="user$ | async"
+  ></bukk-results-table>
+</div>
