@@ -16,14 +16,20 @@ import { Game, GameResult, User } from '../models';
 
         <ng-container matColumnDef="white">
           <mat-header-cell *matHeaderCellDef> White </mat-header-cell>
-          <mat-cell *matCellDef="let game">
+          <mat-cell
+            *matCellDef="let game"
+            [routerLink]="['/users', user(game.white)?.id]"
+          >
             {{ user(game.white)?.email }}
           </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="black">
           <mat-header-cell *matHeaderCellDef> Black </mat-header-cell>
-          <mat-cell *matCellDef="let game">
+          <mat-cell
+            *matCellDef="let game"
+            [routerLink]="['/users', user(game.black)?.id]"
+          >
             {{ user(game.black)?.email }}
           </mat-cell>
         </ng-container>

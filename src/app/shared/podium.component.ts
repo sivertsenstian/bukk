@@ -5,18 +5,17 @@ import { Podium } from '../models';
   selector: 'bukk-podium',
   template: `
     <div class="container" *ngIf="podium">
-      <mat-card>
+      <mat-card [routerLink]="['/users', podium?.gold?.id]">
         <mat-card-header>
           <div mat-card-avatar class="one">
             <mat-icon class="one">looks_one</mat-icon>
           </div>
           <mat-card-title> {{ podium?.gold?.email }}</mat-card-title>
           <mat-card-subtitle> {{ podium?.gold?.rating }} ELO</mat-card-subtitle>
-          <a routerLink="/users/3">CLICKY</a>
         </mat-card-header>
       </mat-card>
 
-      <mat-card>
+      <mat-card [routerLink]="['/users', podium?.silver?.id]">
         <mat-card-header>
           <div mat-card-avatar class="two">
             <mat-icon class="two">looks_two</mat-icon>
@@ -28,7 +27,7 @@ import { Podium } from '../models';
         </mat-card-header>
       </mat-card>
 
-      <mat-card>
+      <mat-card [routerLink]="['/users', podium?.bronze?.id]">
         <mat-card-header>
           <div mat-card-avatar class="three">
             <mat-icon class="three">looks_3</mat-icon>

@@ -22,6 +22,13 @@
   width: 70%;
 
   mat-card {
+    &:hover {
+      background: whitesmoke;
+      mat-icon {
+        font-size: 46px;
+      }
+    }
+    cursor: pointer;
     height: 50px;
     margin-bottom: 5px;
   }
