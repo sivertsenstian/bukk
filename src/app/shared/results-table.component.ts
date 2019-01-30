@@ -42,7 +42,10 @@ import { Game, GameResult, User } from '../models';
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        <mat-row
+          *matRowDef="let row; columns: displayedColumns"
+          [routerLink]="['/games', row.id]"
+        ></mat-row>
       </mat-table>
     </div>
   `

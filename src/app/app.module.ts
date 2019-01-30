@@ -26,6 +26,7 @@ import { AppState } from './reducers';
 import { UsersEffects } from './user/users.effects';
 import { GamesEffects } from './game/games.effects';
 import { UserEffects } from './user/user.effects';
+import { GameEffects } from './game/game.effects';
 
 // const config = new AuthServiceConfig([
 //   {
@@ -47,7 +48,12 @@ import { UserEffects } from './user/user.effects';
       maxAge: 25,
       logOnly: environment.production
     }),
-    EffectsModule.forRoot([UsersEffects, GamesEffects, UserEffects]),
+    EffectsModule.forRoot([
+      UserEffects,
+      UsersEffects,
+      GameEffects,
+      GamesEffects
+    ]),
     AppRoutingModule,
     MaterialModule,
     SocialLoginModule,

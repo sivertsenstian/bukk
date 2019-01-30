@@ -240,8 +240,8 @@ const games: Game[] = [
   {
     id: 20,
     date: new Date(),
-    white: 3,
-    black: 2,
+    white: 2,
+    black: 3,
     result: 2,
     online: true,
     type: 0

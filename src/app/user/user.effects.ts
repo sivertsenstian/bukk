@@ -11,6 +11,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { mergeMap, map } from 'rxjs/operators';
 import { UsersService } from './users.service';
 import { UserId } from '../models';
+import { LoadUsers } from '../actions/users.actions';
 
 @Injectable()
 export class UserEffects {
@@ -39,7 +40,7 @@ export class UserEffects {
     ofType(UserActionTypes.InitUser),
     map((action: InitUser) => action.payload),
     mergeMap((id: UserId) => {
-      return [new LoadUser(id), new LoadUserGames(id)];
+      return [new LoadUser(id), new LoadUserGames(id), new LoadUsers()];
     })
   );
 

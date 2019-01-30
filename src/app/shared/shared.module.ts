@@ -5,11 +5,12 @@ import { PodiumComponent } from './podium.component';
 import { MaterialModule } from '../material.module';
 import { ResultsTableComponent } from './results-table.component';
 import { AppRoutingModule } from '../app-routing.module';
+import { FormsModule } from '@angular/forms';
 
 const COMPONENTS = [LoaderComponent, PodiumComponent, ResultsTableComponent];
 
 @NgModule({
-  imports: [AppRoutingModule, MaterialModule, CommonModule],
+  imports: [AppRoutingModule, MaterialModule, CommonModule, FormsModule],
   declarations: COMPONENTS,
   exports: COMPONENTS
 })

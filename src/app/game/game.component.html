@@ -1,1 +1,57 @@
-<h1>GAME</h1>
+<div class="container air">
+  <div class="mat-headline">
+    {{ title() }}
+  </div>
+  <form>
+    <mat-form-field class="input">
+      <input
+        matInput
+        readonly
+        placeholder="White"
+        [value]="user(game?.white)?.email"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="input">
+      <input
+        matInput
+        readonly
+        placeholder="Black"
+        [value]="user(game?.black)?.email"
+      />
+    </mat-form-field>
+    <div>
+      <label class="mat-subheading-2">Result: </label>
+      <mat-radio-group formControlName="floatLabel">
+        <mat-radio-button
+          disabled="{{ game?.result !== 0 }}"
+          checked="{{ game?.result === 0 }}"
+          name="white"
+          value="RESULT.White"
+          >White</mat-radio-button
+        >
+        <mat-radio-button
+          disabled="{{ game?.result !== 1 }}"
+          checked="{{ game?.result === 1 }}"
+          name="black"
+          value="RESULT.Black"
+          >Black</mat-radio-button
+        >
+        <mat-radio-button
+          disabled="{{ game?.result !== 2 }}"
+          checked="{{ game?.result === 2 }}"
+          name="draw"
+          value="RESULT.Draw"
+          >Draw</mat-radio-button
+        >
+        <mat-radio-button
+          disabled="{{ game?.result !== 3 }}"
+          checked="{{ game?.result === 3 }}"
+          name="tbd"
+          value="RESULT.TBD"
+          >TBD</mat-radio-button
+        >
+      </mat-radio-group>
+    </div>
+  </form>
+</div>

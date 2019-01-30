@@ -1,13 +1,39 @@
 <div class="container air">
-  <div class="mat-headline">{{ (user$ | async)?.email }}</div>
-  <div class="mat-subheading">{{ (user$ | async)?.rating }}</div>
-  <div class="mat-caption">{{ (user$ | async)?.lichessAccount }}</div>
+  <form>
+    <mat-form-field class="input">
+      <input
+        matInput
+        readonly
+        placeholder="Name"
+        [value]="(user$ | async)?.email"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="input">
+      <input
+        matInput
+        readonly
+        placeholder="ELO Rating"
+        [value]="(user$ | async)?.rating"
+      />
+    </mat-form-field>
+    <mat-form-field class="input">
+      <input
+        matInput
+        placeholder="Lichess Account"
+        [value]="(user$ | async)?.lichessAccount"
+      />
+      <mat-hint align="start"
+        ><strong>Your username at lichess.org</strong>
+      </mat-hint>
+      <mat-hint align="end">confirmed</mat-hint>
+    </mat-form-field>
+  </form>
 </div>
-<mat-divider></mat-divider>
-<div class="container air">
+<div class="container air games">
   <bukk-results-table
     title="Games"
     [games]="games$ | async"
-    [users]="user$ | async"
+    [users]="users$ | async"
   ></bukk-results-table>
 </div>

@@ -5,7 +5,14 @@ import {
   MatIconModule,
   MatTableModule,
   MatProgressSpinnerModule,
-  MatDividerModule
+  MatDividerModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatRadioModule,
+  MatCheckboxModule,
+  MatSelectModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -20,7 +27,14 @@ const MODULES = [
   MatIconModule,
   MatTableModule,
   MatProgressSpinnerModule,
-  MatDividerModule
+  MatDividerModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatRadioModule,
+  MatCheckboxModule,
+  MatSelectModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 ];
 
 @NgModule({

@@ -18,6 +18,7 @@ export class UserComponent implements OnInit {
     state => state.user.loading.games
   );
   user$: Observable<User> = this.store.select(state => state.user.entity);
+  users$: Observable<User[]> = this.store.select(state => state.users.entities);
   games$: Observable<Game[]> = this.store.select(state => state.user.games);
 
   constructor(private store: Store<any>, private route: ActivatedRoute) {}

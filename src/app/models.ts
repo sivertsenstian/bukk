@@ -42,6 +42,16 @@ export interface Game {
   type: GameType;
 }
 
+export class GameEntity implements Game {
+  id: number = null;
+  date: Date = new Date();
+  white: number = null;
+  black: number = null;
+  result: GameResult = GameResult.TBD;
+  type: GameType = GameType.Classic;
+  online = false;
+}
+
 export interface Podium {
   gold: User | null;
   silver: User | null;
