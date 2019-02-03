@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User, Game, GameResult, GameType } from '../models';
 import { Store } from '@ngrx/store';
-import { NewGame } from '../actions/game.actions';
+import { NewGame, UpdateGame, CreateGame } from '../actions/game.actions';
 import { LoadUsers } from '../actions/users.actions';
 import * as _ from 'lodash';
 
@@ -12,18 +12,22 @@ import * as _ from 'lodash';
   styleUrls: ['./new-game.component.scss']
 })
 export class NewGameComponent implements OnInit {
-  RESULT: GameResult;
-  GAME_TYPE: GameType;
+  RESULT;
+  TYPE;
   game: Game;
   users: User[];
-  users$: Observable<User[]> = this.store.select(state => state.users.entities);
-  game$: Observable<Game> = this.store.select(state => state.game.entity);
+  users$: Observable<User[]>;
+  game$: Observable<Game>;
 
-  constructor(private store: Store<any>) {}
+  constructor(private store: Store<any>) {
+    this.RESULT = GameResult;
+    this.TYPE = GameType;
+    this.users$ = this.store.select(state => state.users.entities);
+    this.game$ = this.store.select(state => state.game.entity);
+  }
 
   ngOnInit(): void {
-    this.store.dispatch(new LoadUsers());
-    this.store.dispatch(new NewGame());
+    this.onLoad();
 
     this.game$.subscribe(res => {
       this.game = res;
@@ -32,5 +36,19 @@ export class NewGameComponent implements OnInit {
     this.users$.subscribe(users => {
       this.users = _.values(users);
     });
+  }
+
+  onLoad(): void {
+    this.store.dispatch(new LoadUsers());
+    this.store.dispatch(new NewGame());
+  }
+
+  update(path, event) {
+    const value = !_.isNil(event.value) ? event.value : event.checked;
+    this.store.dispatch(new UpdateGame([path, value]));
+  }
+
+  add(game) {
+    this.store.dispatch(new CreateGame(game));
   }
 }

@@ -1,5 +1,6 @@
 import { GameActions, GameActionTypes } from '../actions/game.actions';
 import { Game, LOAD, GameEntity, GameType, GameResult } from '../models';
+import dotp from 'dot-prop-immutable-chain';
 
 export interface GameState {
   loading: { entity: LOAD; games: LOAD };
@@ -17,17 +18,26 @@ export function GameReducer(
 ): GameState {
   switch (action.type) {
     case GameActionTypes.LoadGameSuccess: {
-      const loading = state.loading;
-      return {
-        ...state,
-        entity: action.payload,
-        loading: { ...loading, entity: LOAD.Success }
-      };
+      return dotp(state)
+        .set('entity', action.payload)
+        .set('loading.entity', LOAD.Success)
+        .value();
     }
     case GameActionTypes.NewGame: {
       const entity = new GameEntity();
       entity.type = GameType.Rapid;
-      return { ...initialState, entity };
+      entity.online = true;
+      return dotp(state)
+        .set('entity', entity)
+        .value();
+    }
+    case GameActionTypes.UpdateGame: {
+      const {
+        payload: [path, val]
+      } = action;
+      return dotp(state)
+        .set(`entity.${path}`, val)
+        .value();
     }
     default:
       return state;

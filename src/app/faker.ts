@@ -255,7 +255,7 @@ async function delay(ms: number) {
 /// SERVER CALLS..
 export const GetUser = async (id: UserId) => {
   await delay(Math.random() * 2000);
-  return Promise.resolve(first(users));
+  return Promise.resolve(users.find(u => u.id === id));
 };
 export const GetUsers = async () => {
   await delay(Math.random() * 2000);
@@ -266,5 +266,18 @@ export const GetUserGames = async (id: UserId) => {
   return Promise.resolve(games.filter(g => includes([g.white, g.black], id)));
 };
 
-export const GetGame = (id: GameId) => Promise.resolve(first(games));
-export const GetGames = () => Promise.resolve(games);
+export const GetGame = async (id: GameId) => {
+  await delay(Math.random() * 2000);
+  return Promise.resolve(games.find(g => g.id === id));
+};
+export const GetGames = async () => {
+  await delay(Math.random() * 5000);
+  return Promise.resolve(games);
+};
+export const AddGame = async game => {
+  const id = games.length + 10;
+  game.id = id;
+  games.push(game);
+  await delay(Math.random() * 2000);
+  return Promise.resolve(game);
+};

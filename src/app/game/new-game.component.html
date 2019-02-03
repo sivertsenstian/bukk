@@ -4,14 +4,20 @@
   </div>
   <form>
     <mat-form-field class="input">
-      <mat-select placeholder="White">
+      <mat-select
+        placeholder="White"
+        (selectionChange)="update('white', $event)"
+      >
         <mat-option *ngFor="let user of users" [value]="user.id">
           {{ user.email }}
         </mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field class="input">
-      <mat-select placeholder="Black">
+      <mat-select
+        placeholder="Black"
+        (selectionChange)="update('black', $event)"
+      >
         <mat-option *ngFor="let user of users" [value]="user.id">
           {{ user.email }}
         </mat-option>
@@ -19,42 +25,44 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput [matDatepicker]="picker" placeholder="Choose a date" />
+      <input
+        matInput
+        (dateChange)="update('date', $event)"
+        [matDatepicker]="picker"
+        placeholder="Choose a date"
+      />
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
-    <!-- <mat-form-field> -->
-    <!--   <input matInput [matDatepicker]="picker" placeholder="Choose a date" /> -->
-    <!--   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle> -->
-    <!--   <mat-datepicker #picker></mat-datepicker> -->
-    <!-- </mat-form-field> -->
-
     <div>
       <label class="mat-subheading-2">Result: </label>
-      <mat-radio-group formControlName="floatLabel">
+      <mat-radio-group
+        formControlName="floatLabel"
+        (change)="update('result', $event)"
+      >
         <mat-radio-button
-          checked="{{ game?.result === 0 }}"
+          checked="{{ game?.result === RESULT.White }}"
           name="white"
-          value="RESULT.White"
+          [value]="RESULT.White"
           >White</mat-radio-button
         >
         <mat-radio-button
-          checked="{{ game?.result === 1 }}"
+          checked="{{ game?.result === RESULT.Black }}"
           name="black"
-          value="RESULT.Black"
+          [value]="RESULT.Black"
           >Black</mat-radio-button
         >
         <mat-radio-button
-          checked="{{ game?.result === 2 }}"
+          checked="{{ game?.result === RESULT.Draw }}"
           name="draw"
-          value="RESULT.Draw"
+          [value]="RESULT.Draw"
           >Draw</mat-radio-button
         >
         <mat-radio-button
-          checked="{{ game?.result === 3 }}"
+          checked="{{ game?.result === RESULT.TBD }}"
           name="tbd"
-          value="RESULT.TBD"
+          [value]="RESULT.TBD"
           >TBD</mat-radio-button
         >
       </mat-radio-group>
@@ -62,45 +70,54 @@
 
     <div>
       <label class="mat-subheading-2">Type: </label>
-      <mat-radio-group formControlName="floatLabel">
+      <mat-radio-group
+        formControlName="floatLabel"
+        (change)="update('type', $event)"
+      >
         <mat-radio-button
-          checked="{{ game?.type === 0 }}"
+          checked="{{ game?.type === TYPE.Bullet }}"
           name="bullet"
-          value="GAME_TYPE.Bullet"
+          [value]="TYPE.Bullet"
           >Bullet</mat-radio-button
         >
 
         <mat-radio-button
-          checked="{{ game?.type === 1 }}"
+          checked="{{ game?.type === TYPE.Blitz }}"
           name="bullet"
-          value="GAME_TYPE.Blitz"
+          [value]="TYPE.Blitz"
           >Blitz</mat-radio-button
         >
 
         <mat-radio-button
-          checked="{{ game?.type === 2 }}"
+          checked="{{ game?.type === TYPE.Rapid }}"
           name="rapid"
-          value="GAME_TYPE.Rapid"
+          [value]="TYPE.Rapid"
           >Rapid</mat-radio-button
         >
 
         <mat-radio-button
-          checked="{{ game?.type === 3 }}"
+          checked="{{ game?.type === TYPE.Classic }}"
           name="classic"
-          value="GAME_TYPE.Classic"
+          [value]="TYPE.Classic"
           >Classic</mat-radio-button
         >
 
         <mat-radio-button
-          checked="{{ game?.type === 4 }}"
+          checked="{{ game?.type === TYPE.Correspondence }}"
           name="correspondence"
-          value="GAME_TYPE.Correspondence"
+          [value]="TYPE.Correspondence"
           >Correspondence</mat-radio-button
         >
       </mat-radio-group>
     </div>
-    <mat-checkbox value="game.online">Online?</mat-checkbox>
-    <pre>{{ game | json }} </pre>
-    <button mat-raised-button color="primary">Create Game</button>
+    <mat-checkbox
+      (change)="update('online', $event)"
+      checked="{{ game?.online }}"
+      value="game.online"
+      >Online?</mat-checkbox
+    >
+    <button type="button" (click)="add(game)" mat-raised-button color="primary">
+      Create Game
+    </button>
   </form>
 </div>
