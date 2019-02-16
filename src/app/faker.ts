@@ -2,7 +2,7 @@ import { UserId, GameId, User, Game } from './models';
 import { first, includes } from 'lodash';
 
 ///// DATA ////
-const users: User[] = [
+const users: any[] = [
   {
     id: 1,
     email: 'botto0@fc2.com',
@@ -65,7 +65,7 @@ const users: User[] = [
   }
 ];
 
-const games: Game[] = [
+const games: any[] = [
   {
     id: 1,
     date: new Date(),

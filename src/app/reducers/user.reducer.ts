@@ -7,23 +7,38 @@ export interface UserState {
   games: Game[];
 }
 
-export const initialState: UserState = {
+export const initialUserState: UserState = {
   loading: { entity: LOAD.Init, games: LOAD.Init },
   entity: null,
   games: []
 };
 
 export function UserReducer(
-  state = initialState,
+  state = initialUserState,
   action: UserActions
 ): UserState {
   switch (action.type) {
+    case UserActionTypes.LoadUser: {
+      const loading = state.loading;
+      return {
+        ...state,
+        loading: { ...loading, entity: LOAD.Busy }
+      };
+    }
     case UserActionTypes.LoadUserSuccess: {
       const loading = state.loading;
       return {
         ...state,
         entity: action.payload,
         loading: { ...loading, entity: LOAD.Success }
+      };
+    }
+    //FIXME: Something something
+    case UserActionTypes.LoadUserGames: {
+      const loading = state.loading;
+      return {
+        ...state,
+        loading: { ...loading, games: LOAD.Busy }
       };
     }
     case UserActionTypes.LoadUserGamesSuccess: {

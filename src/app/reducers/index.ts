@@ -11,3 +11,5 @@ export const AppState = {
   game: GameReducer,
   games: GamesReducer
 };
+
+export * from './user.reducer';

@@ -1,5 +1,5 @@
 import { GameActions, GameActionTypes } from '../actions/game.actions';
-import { Game, LOAD, GameEntity, GameType, GameResult } from '../models';
+import { Game, LOAD, GameType, GameResult } from '../models';
 import dotp from 'dot-prop-immutable-chain';
 
 export interface GameState {
@@ -24,9 +24,14 @@ export function GameReducer(
         .value();
     }
     case GameActionTypes.NewGame: {
-      const entity = new GameEntity();
-      entity.type = GameType.Rapid;
-      entity.online = true;
+      const entity = {
+        date: new Date(),
+        white: null,
+        black: null,
+        result: GameResult.TBD,
+        type: GameType.Rapid,
+        online: true
+      } as Game;
       return dotp(state)
         .set('entity', entity)
         .value();

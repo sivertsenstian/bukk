@@ -1,4 +1,4 @@
-type Id = number;
+type Id = string;
 
 export type UserId = Id;
 export type GameId = Id;
@@ -27,29 +27,20 @@ export enum GameType {
 
 export interface User {
   id: UserId;
+  avatar?: string;
   email: Email;
   lichessAccount: Email;
   rating: number;
 }
 
 export interface Game {
-  id: GameId;
+  id?: GameId;
   date: Date;
   white: UserId;
   black: UserId;
   result: GameResult;
   online: boolean;
   type: GameType;
-}
-
-export class GameEntity implements Game {
-  id: number = null;
-  date: Date = new Date();
-  white: number = null;
-  black: number = null;
-  result: GameResult = GameResult.TBD;
-  type: GameType = GameType.Classic;
-  online = false;
 }
 
 export interface Podium {

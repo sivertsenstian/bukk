@@ -39,6 +39,7 @@ export class NewGameComponent implements OnInit {
   }
 
   onLoad(): void {
+    //TODO: This should be blabla
     this.store.dispatch(new LoadUsers());
     this.store.dispatch(new NewGame());
   }

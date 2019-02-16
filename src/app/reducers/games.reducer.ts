@@ -19,7 +19,9 @@ export function GamesReducer(
     case GamesActionTypes.LoadGames:
       return { ...state, loading: LOAD.Busy };
     case GamesActionTypes.LoadGamesSuccess:
+      console.log(action);
       const games = action.payload;
+      console.log(games);
       return {
         ...state,
         entities: games.reduce((r: { [key: number]: Game }, g: Game) => {

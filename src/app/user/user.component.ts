@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Game, User, LOAD, UserId } from '../models';
-import { Observable, from, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { InitUser } from '../actions/user.actions';
@@ -29,7 +29,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      const id = Number(params.get('id')) as UserId;
+      const id = params.get('id') as UserId;
       this.store.dispatch(new InitUser(id));
     });
   }

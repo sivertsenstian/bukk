@@ -2,13 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
-import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
-import {
-  GoogleLoginProvider,
-  FacebookLoginProvider,
-  LinkedInLoginProvider
-} from 'angularx-social-login';
-
 import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './home/home.module';
 import { AppComponent } from './app.component';
@@ -22,25 +15,36 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { environment } from 'src/environments/environment';
 
+// currently there is a bug while building the app with --prod
+// - https://github.com/RaphaelJenni/FirebaseUI-Angular/issues/76
+// the plugin exposes the two libraries as well. You can use those:
+import { FirebaseUIModule, firebase, firebaseui } from 'firebaseui-angular';
+
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
 import { AppState } from './reducers';
 import { UsersEffects } from './user/users.effects';
 import { GamesEffects } from './game/games.effects';
-import { UserEffects } from './user/user.effects';
-import { GameEffects } from './game/game.effects';
+import { CommonEffects } from './effects/common.effects';
 
-// const config = new AuthServiceConfig([
-//   {
-//     id: GoogleLoginProvider.PROVIDER_ID
-//   }
-// ]);
-
-// export function provideConfig() {
-//   return config;
-// }
+const firebaseUiAuthConfig: firebaseui.auth.Config = {
+  signInFlow: 'popup',
+  signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
+  tosUrl: '<your-tos-link>',
+  privacyPolicyUrl: '<your-privacyPolicyUrl-link>',
+  credentialHelper: firebaseui.auth.CredentialHelper.ACCOUNT_CHOOSER_COM
+};
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
   imports: [
+    AngularFireModule.initializeApp(environment.firebaseConfig, 'bukkolini'),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    FirebaseUIModule.forRoot(firebaseUiAuthConfig),
+
     BrowserModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(AppState),
@@ -48,24 +52,12 @@ import { GameEffects } from './game/game.effects';
       maxAge: 25,
       logOnly: environment.production
     }),
-    EffectsModule.forRoot([
-      UserEffects,
-      UsersEffects,
-      GameEffects,
-      GamesEffects
-    ]),
+    EffectsModule.forRoot([CommonEffects, UsersEffects, GamesEffects]),
     AppRoutingModule,
     MaterialModule,
-    SocialLoginModule,
     HomeModule,
     UserModule,
     GameModule
-  ],
-  providers: [
-    {
-      provide: AuthServiceConfig
-      // useFactory: provideConfig
-    }
   ],
   bootstrap: [AppComponent]
 })

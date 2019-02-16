@@ -24,6 +24,8 @@ export function UsersReducer(
     case UsersActionTypes.LoadUsers:
       return { ...state, loading: LOAD.Busy };
     case UsersActionTypes.LoadUsersSuccess:
+      console.log('USERS!');
+      console.log(action);
       const users = action.payload,
         [gold, silver, bronze] = take(
           users.sort((a, b) => b.rating - a.rating),

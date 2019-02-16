@@ -22,7 +22,7 @@ export class GameComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      const id = Number(params.get('id')) as GameId;
+      const id = params.get('id') as GameId;
       this.store.dispatch(new InitGame(id));
     });
 

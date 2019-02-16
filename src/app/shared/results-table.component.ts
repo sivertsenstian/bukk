@@ -4,8 +4,9 @@ import { Game, GameResult, User } from '../models';
 @Component({
   selector: 'bukk-results-table',
   template: `
-    <div class="container" *ngIf="games">
+    <div class="container">
       <div class="mat-title">{{ title }}</div>
+      <div [class.mat-elevation-z8]="games.length === 0">
       <mat-table [dataSource]="games" class="mat-elevation-z8">
         <ng-container matColumnDef="date">
           <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
@@ -47,6 +48,13 @@ import { Game, GameResult, User } from '../models';
           [routerLink]="['/games', row.id]"
         ></mat-row>
       </mat-table>
+        <mat-card
+          *ngIf="games.length === 0"
+          style="border-radius:0px;text-align:center;"
+        >
+          No recent games :(</mat-card
+        >
+      </div>
     </div>
   `
 })
@@ -73,6 +81,6 @@ export class ResultsTableComponent {
   }
 
   user(id) {
-    return this.users[id] || null;
+    return this.users[id] || 'Unknown';
   }
 }

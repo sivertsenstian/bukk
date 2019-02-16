@@ -1,11 +1,19 @@
+import * as dotp from 'dot-prop-immutable-chain';
 import { CommonActions, CommonActionTypes } from '../actions/common.actions';
+import { User } from '../models';
 
 export interface CommonState {
-  name: string;
+  currentUser: User;
+  isLoggedIn: boolean;
+  authentication: {
+    token: string;
+  };
 }
 
 export const initialState: CommonState = {
-  name: 'test'
+  currentUser: null,
+  isLoggedIn: false,
+  authentication: { token: null }
 };
 
 export function CommonReducer(
@@ -13,8 +21,22 @@ export function CommonReducer(
   action: CommonActions
 ): CommonState {
   switch (action.type) {
-    case CommonActionTypes.SampleAction:
-      return { ...state, name: 'jensen' };
+    case CommonActionTypes.RegisterNewUserSuccess:
+    case CommonActionTypes.LoginSuccess: {
+      const { user, token } = action.payload;
+
+      console.log('LOGIN SUCCESS');
+      console.log(user);
+
+      return dotp(state)
+        .set('currentUser', user)
+        .set('isLoggedIn', true)
+        .set('authentication.token', token)
+        .value();
+    }
+    case CommonActionTypes.LogoutSuccess: {
+      return initialState;
+    }
     default:
       return state;
   }
