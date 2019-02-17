@@ -2,7 +2,7 @@ export const environment = {
   production: false,
   hmr: true,
   firebaseConfig: {
-    apiKey: 'AIzaSyAKhkAuC43pjBqfzNRNn8ZaYV0U4Z_CdVM',
+    apiKey: 'AIzaSyCXe7D9wL4RScqCShN3sY_KNiMFqL8iMZk',
     authDomain: 'bukk-f9aaf.firebaseapp.com',
     databaseURL: 'https://bukk-f9aaf.firebaseio.com',
     projectId: 'bukk-f9aaf',

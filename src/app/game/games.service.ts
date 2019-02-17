@@ -15,7 +15,6 @@ export class GamesService {
     this.users = this.db.collection('users').ref;
   }
 
-  
   //TODO: Fix this
   add(game) {
     let newGame = dotp(game)

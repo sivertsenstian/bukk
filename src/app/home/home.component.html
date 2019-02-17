@@ -16,7 +16,14 @@
       [users]="users$ | async"
     ></bukk-results-table>
   </div>
-  <button routerLink="/games/new" class="new-game" mat-fab color="primary">
+  <button
+    *ngIf="(isLoggedIn$ | async)"
+    title="Register an upcoming or finished game"
+    routerLink="/games/new"
+    class="new-game"
+    mat-fab
+    color="primary"
+  >
     <mat-icon>add</mat-icon>
   </button>
 </div>

@@ -4,6 +4,7 @@ import { mergeMap, take, map } from 'rxjs/operators';
 import {
   CommonActionTypes,
   LoginSuccess,
+  LogoutSuccess,
   LoginFailure,
   RegisterNewUser,
   RegisterNewUserFailure,
@@ -69,11 +70,12 @@ export class CommonEffects {
     })
   );
 
-  @Effect({ dispatch: false })
+  @Effect()
   logout$ = this.actions$.pipe(
     ofType(CommonActionTypes.Logout),
     mergeMap(async () => {
       await this.af.auth.signOut();
+      return new LogoutSuccess(); 
     })
   );
 

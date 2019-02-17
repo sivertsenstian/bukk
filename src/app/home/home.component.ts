@@ -5,6 +5,7 @@ import { User, Podium, LOAD, Game } from '../models';
 import { LoadUsers } from '../actions/users.actions';
 import { LoadGames } from '../actions/games.actions';
 import * as _ from 'lodash';
+import { AuthGuard } from '../auth.guard';
 
 @Component({
   selector: 'bukk-home',
@@ -12,6 +13,7 @@ import * as _ from 'lodash';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  isLoggedIn$: Observable<any> = this.store.select(state => state.common.isLoggedIn);
   users$: Observable<User[]> = this.store.select(state => state.users.entities);
   podium$: Observable<Podium> = this.store.select(state => state.users.podium);
   loading$: Observable<LOAD> = this.store.select(state => state.users.loading);

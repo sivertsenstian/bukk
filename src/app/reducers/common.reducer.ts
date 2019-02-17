@@ -24,9 +24,7 @@ export function CommonReducer(
     case CommonActionTypes.RegisterNewUserSuccess:
     case CommonActionTypes.LoginSuccess: {
       const { user, token } = action.payload;
-
       console.log('LOGIN SUCCESS');
-      console.log(user);
 
       return dotp(state)
         .set('currentUser', user)
@@ -35,6 +33,7 @@ export function CommonReducer(
         .value();
     }
     case CommonActionTypes.LogoutSuccess: {
+      console.log('LOGOUT SUCCESS');
       return initialState;
     }
     default:
