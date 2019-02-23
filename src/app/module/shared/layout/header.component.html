@@ -1,0 +1,35 @@
+<mat-toolbar color="primary">
+  <img routerLink="/" src="/assets/bukk.png" width="32" height="32" />
+  <span class="name">BUKK</span>
+  <span class="spacer"></span>
+  <button
+    *ngIf="!(loggedIn$ | async)"
+    style="margin-right: 30px;"
+    mat-icon-button
+    color="accent"
+    (click)="login()"
+  >
+    Log in
+    <mat-icon aria-label="Log in">account_circle</mat-icon>
+  </button>
+
+  <button
+    *ngIf="(loggedIn$ | async)"
+    style="margin-right: 30px;"
+    mat-icon-button
+    color="accent"
+    (click)="logout()"
+  >
+    Log out
+  </button>
+  <div
+    *ngIf="(user$ | async) as user"
+    title="Logged in as {{ user.email }}"
+    mat-card-avatar
+    [routerLink]="['/users', user.id]"
+    [ngStyle]="{
+      'background-image': 'url(' + user.avatar + ')'
+    }"
+    class="avatar-header-image"
+  ></div>
+</mat-toolbar>

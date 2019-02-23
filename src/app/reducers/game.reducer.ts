@@ -1,6 +1,6 @@
-import { GameActions, GameActionTypes } from '../actions/game.actions';
-import { Game, LOAD, GameType, GameResult } from '../models';
 import dotp from 'dot-prop-immutable-chain';
+import { GameActions, GameActionTypes } from '@actions';
+import { Game, LOAD, GameType, GameResult } from '@core';
 
 export interface GameState {
   loading: { entity: LOAD; games: LOAD };

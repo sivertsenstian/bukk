@@ -1,6 +1,11 @@
+import * as _ from 'lodash';
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase';
 import { mergeMap, take, map } from 'rxjs/operators';
+import { UsersService } from '@services';
 import {
   CommonActionTypes,
   LoginSuccess,
@@ -9,14 +14,9 @@ import {
   RegisterNewUser,
   RegisterNewUserFailure,
   RegisterNewUserSuccess,
-  RedirectTo
-} from '../actions/common.actions';
-import { UsersService } from '../user/users.service';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase';
-import * as _ from 'lodash';
-import { LoadUsers } from '../actions/users.actions';
-import { Router } from '@angular/router';
+  RedirectTo,
+  LoadUsers
+} from '@actions';
 
 @Injectable()
 export class CommonEffects {
@@ -24,7 +24,6 @@ export class CommonEffects {
   whoami$ = this.actions$.pipe(
     ofType(CommonActionTypes.Whoami),
     mergeMap<any, any>(async () => {
-      console.log('WHOAMI?');
       let authUser = null;
       await this.af.user.pipe(take(1)).subscribe(result => {
         authUser = result;
@@ -39,7 +38,6 @@ export class CommonEffects {
             ...d.data()
           };
 
-        console.log(user);
         return new LoginSuccess({ user, token: null });
       }
       return new LoginFailure(authUser);

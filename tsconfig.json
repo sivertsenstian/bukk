@@ -17,6 +17,16 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+      "paths": {
+	  "@app": ["src/app"],
+	  "@core": ["src/app/core"],
+	  "@modules": ["src/app/module"],
+	  "@shared": ["src/app/module/shared"],
+	  "@actions": ["src/app/actions"],
+	  "@reducers": ["src/app/reducers"],
+	  "@effects": ["src/app/effects"],
+	  "@services": ["src/app/services"]
+      }
   }
 }

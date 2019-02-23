@@ -1,0 +1,29 @@
+<div class="container gap">
+  <bukk-loader [loading]="loading$ | async"> </bukk-loader>
+  <bukk-podium [podium]="podium$ | async"></bukk-podium>
+  <mat-divider></mat-divider>
+  <div class="tables">
+    <bukk-results-table
+      class="online"
+      title="Last 5 online"
+      [games]="online$ | async"
+      [users]="users$ | async"
+    ></bukk-results-table>
+    <bukk-results-table
+      class="live"
+      title="Last 5 live"
+      [games]="live$ | async"
+      [users]="users$ | async"
+    ></bukk-results-table>
+  </div>
+  <button
+    *ngIf="(isLoggedIn$ | async)"
+    title="Register an upcoming or finished game"
+    routerLink="/games/new"
+    class="new-game"
+    mat-fab
+    color="primary"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

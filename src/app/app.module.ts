@@ -2,16 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { HomeModule } from './home/home.module';
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './shared';
-import { UserModule } from './user/user.module';
-import { GameModule } from './game/game.module';
-import { MaterialModule } from './material.module';
-
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, ActionReducer, State, MetaReducer } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { environment } from 'src/environments/environment';
 
@@ -24,10 +16,17 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
-import { AppState } from './reducers';
-import { UsersEffects } from './user/users.effects';
-import { GamesEffects } from './game/games.effects';
-import { CommonEffects } from './effects/common.effects';
+import { AppRoutingModule, MaterialModule } from '@core';
+import { HomeModule, UserModule, GameModule } from '@modules';
+import { HeaderComponent } from '@modules/shared';
+import { AppComponent } from '@app';
+import { AppState } from '@reducers';
+import {
+  UserEffects,
+  GameEffects,
+  CommonEffects,
+  LichessEffects
+} from '@effects';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
@@ -52,7 +51,12 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
       maxAge: 25,
       logOnly: environment.production
     }),
-    EffectsModule.forRoot([CommonEffects, UsersEffects, GamesEffects]),
+    EffectsModule.forRoot([
+      CommonEffects,
+      UserEffects,
+      GameEffects,
+      LichessEffects
+    ]),
     AppRoutingModule,
     MaterialModule,
     HomeModule,

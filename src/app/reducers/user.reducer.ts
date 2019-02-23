@@ -1,5 +1,6 @@
-import { UserActions, UserActionTypes } from '../actions/user.actions';
-import { User, Game, LOAD } from '../models';
+import * as dotp from 'dot-prop-immutable-chain';
+import { UserActions, UserActionTypes } from '@actions';
+import { User, Game, LOAD } from '@core';
 
 export interface UserState {
   loading: { entity: LOAD; games: LOAD };
@@ -19,35 +20,32 @@ export function UserReducer(
 ): UserState {
   switch (action.type) {
     case UserActionTypes.LoadUser: {
-      const loading = state.loading;
-      return {
-        ...state,
-        loading: { ...loading, entity: LOAD.Busy }
-      };
+      return dotp(state)
+        .set('loading.entity', LOAD.Busy)
+        .value();
     }
     case UserActionTypes.LoadUserSuccess: {
-      const loading = state.loading;
-      return {
-        ...state,
-        entity: action.payload,
-        loading: { ...loading, entity: LOAD.Success }
-      };
+      return dotp(state)
+        .set('entity', action.payload)
+        .set('loading.entity', LOAD.Success)
+        .value();
     }
-    //FIXME: Something something
     case UserActionTypes.LoadUserGames: {
-      const loading = state.loading;
-      return {
-        ...state,
-        loading: { ...loading, games: LOAD.Busy }
-      };
+      return dotp(state)
+        .set('loading.games', LOAD.Busy)
+        .value();
     }
     case UserActionTypes.LoadUserGamesSuccess: {
-      const loading = state.loading;
-      return {
-        ...state,
-        games: action.payload,
-        loading: { ...loading, games: LOAD.Success }
-      };
+      return dotp(state)
+        .set('games', action.payload)
+        .set('loading.games', LOAD.Success)
+        .value();
+    }
+    case UserActionTypes.UpdateUserField: {
+      const [path, value] = action.payload;
+      return dotp(state)
+        .set(`entity.${path}`, value)
+        .value();
     }
     default:
       return state;

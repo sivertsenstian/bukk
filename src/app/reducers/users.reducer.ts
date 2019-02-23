@@ -1,6 +1,6 @@
-import { UsersActions, UsersActionTypes } from '../actions/users.actions';
-import { User, LOAD, UserId, Podium } from '../models';
 import { take } from 'lodash';
+import { UsersActions, UsersActionTypes } from '@actions';
+import { User, LOAD, UserId, Podium } from '@core';
 
 export interface UsersState {
   entities: { [key: number]: User };
@@ -24,8 +24,6 @@ export function UsersReducer(
     case UsersActionTypes.LoadUsers:
       return { ...state, loading: LOAD.Busy };
     case UsersActionTypes.LoadUsersSuccess:
-      console.log('USERS!');
-      console.log(action);
       const users = action.payload,
         [gold, silver, bronze] = take(
           users.sort((a, b) => b.rating - a.rating),

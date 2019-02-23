@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Game } from '../models';
+import { Game } from '@core';
 
 export enum GamesActionTypes {
   LoadGames = '[Games] Load Games',

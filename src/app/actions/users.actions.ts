@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { User } from '../models';
+import { User } from '@core';
 
 export enum UsersActionTypes {
   LoadUsers = '[Users] Load Users',

@@ -1,0 +1,43 @@
+<div class="container air">
+  <form *ngIf="(user$ | async) as user">
+    <mat-form-field class="input">
+      <input
+        matInput
+        readonly
+        disabled
+        placeholder="Email"
+        [value]="user.email"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="input">
+      <input
+        matInput
+        readonly
+        disabled
+        placeholder="ELO Rating"
+        [value]="user.rating"
+      />
+    </mat-form-field>
+    <mat-form-field class="input">
+      <input
+        matInput
+        placeholder="Lichess Account"
+        (change)="verifyLichessAccount(user.lichessAccount)"
+        (input)="updateUser('lichessAccount', $event)"
+        [value]="user.lichessAccount"
+      />
+      <mat-hint align="start"
+        ><strong>Your username at lichess.org</strong>
+      </mat-hint>
+      <mat-hint align="end">confirmed</mat-hint>
+    </mat-form-field>
+  </form>
+</div>
+<div class="container air games">
+  <bukk-results-table
+    title="Games"
+    [games]="games$ | async"
+    [users]="users$ | async"
+  ></bukk-results-table>
+</div>
